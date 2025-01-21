@@ -29,7 +29,7 @@ test("extractTo zip", async () => {
   extractTo(filePath, installDir)
   const ansi2Path = path.join(homedir(), "easy-setup", "ansi2.exe")
   expect(fs.existsSync(ansi2Path)).toEqual(true)
-})
+}, 100_000)
 
 test("extractTo tar.gz", async () => {
   // only test on linux
@@ -37,10 +37,10 @@ test("extractTo tar.gz", async () => {
   const url =
     "https://github.com/ahaoboy/ansi2/releases/download/v0.2.11/ansi2-aarch64-apple-darwin.tar.gz"
   const filePath = path.join(tmpdir(), "ansi2-aarch64-apple-darwin.tar.gz")
-  const installDir = path.join(homedir(), "easy-setup")
-  console.log(installDir, filePath)
+  const testDir = "easy-setup-test"
+  const installDir = path.join(homedir(), testDir)
   await download(url, filePath)
   extractTo(filePath, installDir)
-  const ansi2Path = path.join(homedir(), "easy-setup", "ansi2")
+  const ansi2Path = path.join(homedir(), testDir, "ansi2")
   expect(fs.existsSync(ansi2Path)).toEqual(true)
-})
+}, 100_000)

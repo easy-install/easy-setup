@@ -5,7 +5,7 @@ export type Input = {
 
 export type Output = {
   version: string
-  dir: string
+  installDir: string
   downloadUrl: string
 }
 

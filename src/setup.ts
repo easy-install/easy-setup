@@ -13,7 +13,7 @@ export async function setup(input: Input): Promise<Output> {
   await extractTo(downloadPath, installDir)
   return {
     version,
-    dir: installDir,
+    installDir: installDir,
     downloadUrl: url,
   }
 }

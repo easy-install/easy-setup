@@ -4,9 +4,9 @@ import { setup } from "./setup"
 setup({
   repo: getInput("repo"),
   version: getInput("version"),
-}).then(({ dir, version, downloadUrl }) => {
-  addPath(dir)
+}).then(({ installDir, version, downloadUrl }) => {
+  addPath(installDir)
   setOutput("version", version)
   setOutput("download-url", downloadUrl)
-  setOutput("dir", dir)
+  setOutput("install-dir", installDir)
 })
