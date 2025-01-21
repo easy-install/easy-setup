@@ -21,4 +21,4 @@ jobs:
       - name: Update the ${{ github.event.release.tag_name }} tag
         uses: ./
         with:
-          source-tag: ${{ github.event.release.tag_name }}
+          source-tag: ${{ github.ref }}
