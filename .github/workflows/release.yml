@@ -15,10 +15,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Get Tag Name
+        id: get_tag
+        run: echo "TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+      - name: Print Tag Name
+        run: echo "The tag name is $TAG_NAME"
       - uses: taiki-e/create-gh-release-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Update the ${{ github.ref }} tag
         uses: actions/publish-action@v0.3.0
         with:
-          source-tag: ${{ github.ref }}
+          source-tag: ${{ env.TAG_NAME }}
