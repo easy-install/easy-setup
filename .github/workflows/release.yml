@@ -19,6 +19,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Update the ${{ github.ref }} tag
-        uses: actions/publish-action
+        uses: actions/publish-action@0.3.0
         with:
           source-tag: ${{ github.ref }}
