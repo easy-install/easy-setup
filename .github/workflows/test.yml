@@ -60,4 +60,4 @@ jobs:
         run: |
           deno --version
           ei --version
-          qjs -h
+          qjs -e "console.log(1)"
