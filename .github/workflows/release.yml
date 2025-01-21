@@ -10,7 +10,7 @@ on:
 
 jobs:
   update_tag:
-    name: Update the major tag to include the ${{ github.event.inputs.TAG_NAME || github.event.release.tag_name }} changes
+    name: Update the major tag to include the ${{ github.ref }} changes
     # Remember to configure the releaseNewActionVersion environment with required approvers in the repository settings
     runs-on: ubuntu-latest
     steps:
@@ -18,7 +18,7 @@ jobs:
       - uses: taiki-e/create-gh-release-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Update the ${{ github.event.release.tag_name }} tag
-        uses: actions/publish-action@latest
+      - name: Update the ${{ github.ref }} tag
+        uses: actions/publish-action
         with:
-          source-tag: ${{ env.TAG_NAME }}
+          source-tag: ${{ github.ref }}
