@@ -1,15 +1,15 @@
 import path from "path"
 import { Repo } from "./repo"
-import { download, extractTo } from "./tool"
+import { extractTo } from "./tool"
 import type { Input, Output } from "./type"
-import { homedir, tmpdir } from "os"
+import { homedir } from "os"
+import tc from "@actions/tool-cache"
+
 export async function setup(input: Input): Promise<Output> {
   const { repo, version = "latest" } = input
   const url = await new Repo(repo).getAssetUrl(version)
-  const name = url.split("/").at(-1)!
-  const downloadPath = path.join(tmpdir(), name)
   const installDir = path.join(homedir(), "easy-setup")
-  await download(url, downloadPath)
+  const downloadPath = await tc.downloadTool(url)
   await extractTo(downloadPath, installDir)
   return {
     version,

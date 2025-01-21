@@ -7,14 +7,13 @@
   "bin": {
     "easy-setup": "bundle/cli.js"
   },
+  "files": ["dist", "bundle"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ahaoboy/setup-easy-setup.git"
   },
   "homepage": "https://github.com/ahaoboy/easy-setup#readme",
-  "keywords": [
-    "setup-easy-setup"
-  ],
+  "keywords": ["easy-setup"],
   "author": "ahaoboy",
   "license": "ISC",
   "scripts": {

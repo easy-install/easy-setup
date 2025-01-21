@@ -1,8 +1,10 @@
 import * as fs from "fs"
 import { execSync } from "child_process"
+import tc from "@actions/tool-cache"
+
 export async function download(url: string, outputPath: string) {
-  const buf = await fetch(url).then((res) => res.arrayBuffer())
-  fs.writeFileSync(outputPath, Buffer.from(buf))
+  const tmpPath = await tc.downloadTool(url)
+  fs.writeFileSync(outputPath, fs.readFileSync(tmpPath))
 }
 
 export function extractTo(compressedFilePath: string, outputDir: string) {
