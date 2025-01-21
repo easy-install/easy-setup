@@ -1,10 +1,29 @@
 import * as fs from "fs"
 import { execSync } from "child_process"
-import tc from "@actions/tool-cache"
+import { tmpdir } from "os"
+import * as path from "path"
 
-export async function download(url: string, outputPath: string) {
-  const tmpPath = await tc.downloadTool(url)
-  fs.writeFileSync(outputPath, fs.readFileSync(tmpPath))
+export function getFetchOption() {
+  const headers: HeadersInit = {
+    "User-Agent": "GitHub Actions",
+  }
+  if (process.env.GITHUB_TOKEN) {
+    headers.Authorization = `token ${process.env.GITHUB_TOKEN}`
+  }
+  return {
+    headers,
+  }
+}
+
+export async function download(url: string, outputPath?: string) {
+  if (!outputPath) {
+    const name = url.split('/').at(-1)!
+    outputPath = path.join(tmpdir(), name)
+  }
+  const response = await fetch(url, getFetchOption())
+  const buf = await response.arrayBuffer()
+  fs.writeFileSync(outputPath, Buffer.from(buf))
+  return outputPath
 }
 
 export function extractTo(compressedFilePath: string, outputDir: string) {

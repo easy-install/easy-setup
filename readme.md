@@ -9,4 +9,7 @@ Download, install, and setup in GitHub Actions.
   with:
     repo: https://github.com/denoland/deno
     version: latest
+  env:
+    # need for https://api.github.com/repos/denoland/deno/releases/latest
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```

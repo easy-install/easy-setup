@@ -1,7 +1,6 @@
-import { getAssetNames } from "./tool"
+import { getAssetNames, getFetchOption } from "./tool"
 import { Release } from "./type"
-import * as fs from "fs"
-import tc from "@actions/tool-cache"
+
 export class Repo {
   name: string
   owner: string
@@ -20,12 +19,13 @@ export class Repo {
     }
     return `https://api.github.com/repos/${this.owner}/${this.name}/releases/tags/${tag}`
   }
+
   async getRelease(tag = "latest"): Promise<Release> {
     const url = this.getReleasesApiUrl(tag)
-    const tmpPath = await tc.downloadTool(url)
-    const json = fs.readFileSync(tmpPath, "utf-8")
-    return JSON.parse(json) as Release
+    const json = await fetch(url, getFetchOption()).then((res) => res.json())
+    return json as Release
   }
+
   async getAssetUrl(
     bin = this.name,
     tag = "latest",

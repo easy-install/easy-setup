@@ -13,6 +13,9 @@ jobs:
     name: Update the major tag to include the ${{ github.ref }} changes
     # Remember to configure the releaseNewActionVersion environment with required approvers in the repository settings
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     steps:
       - uses: actions/checkout@v3
       - name: Get Tag Name
@@ -23,7 +26,7 @@ jobs:
       - uses: taiki-e/create-gh-release-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Update the ${{ github.ref }} tag
+      - name: Update the ${{ env.TAG_NAME }} tag
         uses: actions/publish-action@v0.3.0
         with:
           source-tag: ${{ env.TAG_NAME }}
