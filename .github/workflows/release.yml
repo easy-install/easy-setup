@@ -20,6 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/publish-action@v0.3.0
+        if: startsWith(github.ref, 'refs/tags/')
         with:
           source-tag: ${{ env.TAG_NAME }}
 
