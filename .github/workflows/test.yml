@@ -18,12 +18,7 @@ jobs:
   rust-test:
     strategy:
       matrix:
-        os: [
-            ubuntu-24.04,
-            windows-latest,
-            macos-latest,
-            macos-13,
-          ]
+        os: [ubuntu-24.04, windows-latest, macos-latest, macos-13]
     runs-on: ${{ matrix.os }}
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -39,3 +34,23 @@ jobs:
           pnpm run build
           pnpm run bundle
           pnpm run test:run
+      - name: setup deno
+        uses: ./
+        with:
+          repo: https://github.com/denoland/deno
+          version: latest
+      - name: setup deno
+        uses: ./
+        with:
+          repo: https://github.com/denoland/deno
+          version: latest
+      - name: setup ei
+        uses: ./
+        with:
+          repo: https://github.com/ahaoboy/easy-install
+          version: latest
+          bin: ei
+      - name: test setup
+        run: |
+          deno --version
+          ei --version

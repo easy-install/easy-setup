@@ -1,6 +1,7 @@
 export type Input = {
   repo: string
   version?: string
+  bin?: string
 }
 
 export type Output = {
