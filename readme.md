@@ -13,3 +13,14 @@ Download, install, and setup in GitHub Actions.
     # need for https://api.github.com/repos/denoland/deno/releases/latest
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
+
+
+```yaml
+- uses: ahaoboy/easy-setup@v1
+  with:
+    repo: https://github.com/ahaoboy/easy-install
+    version: latest
+    bin: ei
+  env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
