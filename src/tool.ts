@@ -17,7 +17,7 @@ export function getFetchOption() {
 
 export async function download(url: string, outputPath?: string) {
   if (!outputPath) {
-    const name = url.split('/').at(-1)!
+    const name = url.split("/").at(-1)!
     outputPath = path.join(tmpdir(), name)
   }
   const response = await fetch(url, getFetchOption())

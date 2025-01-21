@@ -50,7 +50,14 @@ jobs:
           repo: https://github.com/ahaoboy/easy-install
           version: latest
           bin: ei
+      - name: setup qjs-ng
+        uses: ./
+        with:
+          repo: https://github.com/ahaoboy/quickjs-ng-build
+          version: latest
+          bin: qjs-ng
       - name: test setup
         run: |
           deno --version
           ei --version
+          qjs -h
