@@ -1,0 +1,24 @@
+name: Setup easy-setup
+description: Download, install, and setup easy-setup to your path.
+author: ahaoboy
+branding:
+  icon: play-circle
+  color: white
+inputs:
+  repo:
+    description: 'The repo to install'
+    required: true
+  version:
+    description: 'The version of easy-setup to install. (e.g. "latest", "0.1.4")'
+    required: false
+outputs:
+  version:
+    description: The version of easy-setup that was installed.
+  path:
+    description: The path to the easy-setup executable.
+  download-url:
+    description: The URL from which easy-setup was downloaded.
+
+runs:
+  using: "node20"
+  main: "bundle/action.js"

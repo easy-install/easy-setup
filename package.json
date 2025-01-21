@@ -1,0 +1,44 @@
+{
+  "name": "setup-easy-setup",
+  "version": "0.1.0",
+  "description": "setup-easy-setup",
+  "types": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "bin": {
+    "easy-setup": "bundle/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahaoboy/setup-easy-setup.git"
+  },
+  "homepage": "https://github.com/ahaoboy/easy-setup#readme",
+  "keywords": [
+    "setup-easy-setup"
+  ],
+  "author": "ahaoboy",
+  "license": "ISC",
+  "scripts": {
+    "format": "biome format --write  ./",
+    "lint:fix": "biome lint ./ --write --unsafe",
+    "test": "vitest",
+    "test:run": "vitest --run",
+    "build": "tsc -p tsconfig.build.json",
+    "bundle": "esbuild --target=node20 --outdir=bundle --bundle --minify --platform=node --format=cjs src/cli.ts src/action.ts",
+    "start": "npm run build && node dist/index.js"
+  },
+  "dependencies": {
+    "@actions/cache": "^4.0.0",
+    "@actions/core": "^1.11.1",
+    "@actions/exec": "^1.1.1",
+    "@actions/glob": "^0.5.0",
+    "@actions/io": "^1.1.3",
+    "@actions/tool-cache": "^2.0.2"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@types/node": "^22.10.7",
+    "esbuild": "^0.24.2",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.2"
+  }
+}

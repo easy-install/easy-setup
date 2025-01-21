@@ -1,0 +1,25 @@
+name: Release
+
+permissions:
+  contents: write
+
+on: [push]
+
+defaults:
+  run:
+    shell: bash --noprofile --norc -CeEuo pipefail {0}
+
+env:
+  TAG_NAME: ${{ github.event.inputs.TAG_NAME || github.event.release.tag_name }}
+
+jobs:
+  update_tag:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/publish-action@v0.3.0
+        with:
+          source-tag: ${{ env.TAG_NAME }}
+
