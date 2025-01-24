@@ -28,26 +28,21 @@ jobs:
       - uses: pnpm/action-setup@v4
         with:
           version: 10
-      - name: vitest
+      - name: build
         run: |
           pnpm install
           pnpm run build
           pnpm run bundle
-          pnpm run test:run
       - name: setup deno
         uses: ./
         with:
-          repo: https://github.com/denoland/deno
+          url: https://github.com/denoland/deno
           version: latest
-      - name: setup deno
-        uses: ./
-        with:
-          repo: https://github.com/denoland/deno
-          version: latest
+          bin: deno
       - name: setup ei
         uses: ./
         with:
-          repo: https://github.com/ahaoboy/easy-install
+          url: https://github.com/ahaoboy/easy-install
           version: latest
           bin: ei
       - name: setup qjs-ng

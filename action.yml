@@ -5,11 +5,14 @@ branding:
   icon: play-circle
   color: white
 inputs:
-  repo:
-    description: 'The repo to install'
+  url:
+    description: 'The url to install'
     required: true
   version:
     description: 'The version of easy-setup to install. (e.g. "latest", "0.1.4")'
+    required: false
+  bin:
+    description: 'The binary name'
     required: false
 outputs:
   version:

@@ -1,11 +1,16 @@
 import { addPath, getInput, setOutput } from "@actions/core"
-import { setup } from "./setup"
+import { homedir } from "os"
+import { join } from "path"
+import { install } from "steal-cli"
 
-setup({
-  repo: getInput("repo"),
-  version: getInput("version"),
-  bin: getInput("bin"),
-}).then(({ installDir, version, downloadUrl }) => {
+install(
+  {
+    url: getInput("url"),
+    version: getInput("version"),
+    bin: getInput("bin"),
+  },
+  join(homedir(), "easy-setup"),
+).then(({ installDir, version, downloadUrl }) => {
   addPath(installDir)
   setOutput("version", version)
   setOutput("download-url", downloadUrl)
