@@ -48,7 +48,7 @@ jobs:
       - name: setup qjs-ng
         uses: ./
         with:
-          repo: https://github.com/ahaoboy/quickjs-ng-build
+          url: https://github.com/ahaoboy/quickjs-ng-build
           version: latest
           bin: qjs-ng
       - name: test setup
