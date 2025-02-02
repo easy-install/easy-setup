@@ -20,7 +20,7 @@ Download, install, and setup in GitHub Actions.
   with:
     repo: https://github.com/ahaoboy/easy-install
     version: latest
-    bin: ei
+    name: ei
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```

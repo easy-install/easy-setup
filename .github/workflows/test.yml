@@ -38,19 +38,19 @@ jobs:
         with:
           url: https://github.com/denoland/deno
           version: latest
-          bin: deno
+          name: deno
       - name: setup ei
         uses: ./
         with:
           url: https://github.com/ahaoboy/easy-install
           version: latest
-          bin: ei
+          name: ei
       - name: setup qjs-ng
         uses: ./
         with:
           url: https://github.com/ahaoboy/quickjs-ng-build
           version: latest
-          bin: qjs-ng
+          name: qjs-ng
       - name: test setup
         run: |
           deno --version

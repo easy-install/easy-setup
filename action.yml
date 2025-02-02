@@ -11,7 +11,7 @@ inputs:
   version:
     description: 'The version of easy-setup to install. (e.g. "latest", "0.1.4")'
     required: false
-  bin:
+  name:
     description: 'The binary name'
     required: false
 outputs:
