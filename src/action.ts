@@ -14,6 +14,7 @@ install(
   for (const { installDir } of output) {
     if (installDir) {
       addPath(installDir)
+      console.log(`easy-setup: addPath`, installDir)
     }
     setOutput('install-dir', installDir)
   }
