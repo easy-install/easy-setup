@@ -1,7 +1,7 @@
 {
-  "name": "setup-easy-setup",
-  "version": "1.2.1",
-  "description": "setup-easy-setup",
+  "name": "easy-setup",
+  "version": "1.2.2",
+  "description": "easy-setup",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "bin": {
@@ -10,7 +10,7 @@
   "files": ["dist", "bundle"],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ahaoboy/setup-easy-setup.git"
+    "url": "git+https://github.com/ahaoboy/easy-setup.git"
   },
   "homepage": "https://github.com/ahaoboy/easy-setup#readme",
   "keywords": ["easy-setup"],
@@ -25,14 +25,11 @@
     "bundle": "esbuild --target=node20 --outdir=bundle --bundle --minify --platform=node --format=cjs src/action.ts",
     "start": "npm run build && node dist/index.js"
   },
-  "dependencies": {},
   "devDependencies": {
     "@actions/core": "^1.11.1",
-    "steal-cli": "^0.1.2",
-    "@biomejs/biome": "1.9.4",
+    "@easy-install/easy-install": "^1.2.5",
     "@types/node": "^22.10.7",
     "esbuild": "^0.24.2",
-    "typescript": "^5.7.3",
-    "vitest": "^3.0.2"
+    "typescript": "^5.7.3"
   }
 }
