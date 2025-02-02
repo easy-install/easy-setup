@@ -1,6 +1,6 @@
 {
   "name": "easy-setup",
-  "version": "1.2.3",
+  "version": "1.3.1",
   "description": "easy-setup",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -10,9 +10,9 @@
   "files": ["dist", "bundle"],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ahaoboy/easy-setup.git"
+    "url": "git+https://github.com/easy-install/easy-setup.git"
   },
-  "homepage": "https://github.com/ahaoboy/easy-setup#readme",
+  "homepage": "https://github.com/easy-install/easy-setup#readme",
   "keywords": ["easy-setup"],
   "author": "ahaoboy",
   "license": "ISC",

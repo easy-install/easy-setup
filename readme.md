@@ -5,9 +5,9 @@ Download, install, and setup in GitHub Actions.
 ## Usage
 
 ```yaml
-- uses: ahaoboy/easy-setup@v1
+- uses: easy-install/easy-setup@v1
   with:
-    repo: https://github.com/denoland/deno
+    url: https://github.com/denoland/deno
     version: latest
   env:
     # need for https://api.github.com/repos/denoland/deno/releases/latest
@@ -15,9 +15,9 @@ Download, install, and setup in GitHub Actions.
 ```
 
 ```yaml
-- uses: ahaoboy/easy-setup@v1
+- uses: easy-install/easy-setup@v1
   with:
-    repo: https://github.com/ahaoboy/easy-install
+    url: https://github.com/ahaoboy/easy-install
     version: latest
     name: ei
   env:

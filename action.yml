@@ -17,8 +17,8 @@ inputs:
 outputs:
   version:
     description: The version of easy-setup that was installed.
-  path:
-    description: The path to the easy-setup executable.
+  install-dir:
+    description: The dir to the easy-setup executable.
   download-url:
     description: The URL from which easy-setup was downloaded.
 
