@@ -9,7 +9,7 @@ install(
     version: getInput('version'),
     name: getInput('name'),
   },
-  join(homedir(), 'easy-setup'),
+  join(homedir(), '.easy-setup'),
 ).then((output) => {
   for (const { installDir } of output) {
     if (installDir) {
