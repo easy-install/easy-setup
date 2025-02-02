@@ -17,13 +17,9 @@
   "author": "ahaoboy",
   "license": "ISC",
   "scripts": {
-    "format": "biome format --write  ./",
-    "lint:fix": "biome lint ./ --write --unsafe",
-    "test": "vitest",
-    "test:run": "vitest --run",
+    "format": "deno fmt --ignore=node_modules,dist,bundle,target --indent-width=2 --no-semicolons --single-quote",
     "build": "tsc -p tsconfig.build.json && npm run bundle",
-    "bundle": "esbuild --target=node20 --outdir=bundle --bundle --minify --platform=node --format=cjs src/action.ts",
-    "start": "npm run build && node dist/index.js"
+    "bundle": "esbuild --target=node20 --outdir=bundle --bundle --minify --platform=node --format=cjs src/action.ts"
   },
   "devDependencies": {
     "@actions/core": "^1.11.1",

@@ -14,7 +14,6 @@ Download, install, and setup in GitHub Actions.
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-
 ```yaml
 - uses: ahaoboy/easy-setup@v1
   with:

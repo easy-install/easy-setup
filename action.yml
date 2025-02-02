@@ -23,5 +23,5 @@ outputs:
     description: The URL from which easy-setup was downloaded.
 
 runs:
-  using: "node20"
-  main: "bundle/action.js"
+  using: 'node20'
+  main: 'bundle/action.js'
