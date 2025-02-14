@@ -64,6 +64,7 @@ jobs:
             https://github.com/axodotdev/cargo-dist
             https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/llrt.json
             https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/fnm.json
+            https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/bun.json
 
       - name: test setup
         run: |
@@ -81,3 +82,4 @@ jobs:
           which fnm
           fnm --version
           llrt --version
+          bun --version

@@ -1,6 +1,4 @@
 import { getMultilineInput } from '@actions/core'
-import { homedir } from 'os'
-import { join } from 'path'
 import { addOutputToPath, install } from '@easy-install/easy-install'
 
 const urlList = getMultilineInput('url')
@@ -17,8 +15,7 @@ async function main() {
         url,
         version,
         name,
-      },
-      join(homedir(), '.easy-setup'),
+      }
     ).then(addOutputToPath)
   }
 }
