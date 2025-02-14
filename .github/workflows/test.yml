@@ -18,7 +18,7 @@ jobs:
   rust-test:
     strategy:
       matrix:
-        os: [ubuntu-24.04, windows-latest, macos-latest, macos-13]
+        os: [ubuntu-24.04, windows-latest, macos-14, macos-13]
     runs-on: ${{ matrix.os }}
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -61,7 +61,6 @@ jobs:
         uses: ./
         with:
           url: |-
-            https://github.com/ahaoboy/neofetch
             https://github.com/axodotdev/cargo-dist
             https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/llrt.json
             https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/fnm.json
@@ -78,9 +77,7 @@ jobs:
 
           ls -lh ~/.easy-setup
 
-          which neofetch
           which llrt
           which fnm
           fnm --version
           llrt --version
-          neofetch
