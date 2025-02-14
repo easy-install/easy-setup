@@ -1,6 +1,7 @@
-import { getMultilineInput } from '@actions/core'
-import { homedir } from 'os'
-import { join } from 'path'
+// FIXME: https://github.com/actions/toolkit/issues/1959
+// import { getMultilineInput } from '@actions/core'
+import { getMultilineInput } from './tool'
+
 import { addOutputToPath, install } from '@easy-install/easy-install'
 
 const urlList = getMultilineInput('url')
@@ -18,7 +19,6 @@ async function main() {
         version,
         name,
       },
-      join(homedir(), '.easy-setup'),
     ).then(addOutputToPath)
   }
 }
