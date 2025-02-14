@@ -57,6 +57,15 @@ jobs:
           url: https://github.com/ahaoboy/mujs-build
           version: latest
           name: mujs
+      - name: url list
+        uses: ./
+        with:
+          url: |-
+            https://github.com/ahaoboy/neofetch
+            https://github.com/axodotdev/cargo-dist
+            https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/llrt.json
+            https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/fnm.json
+
       - name: test setup
         run: |
           deno --version
@@ -68,3 +77,10 @@ jobs:
           mujs ./test.js
 
           ls -lh ~/.easy-setup
+
+          which neofetch
+          which llrt
+          which fnm
+          fnm --version
+          llrt --version
+          neofetch
