@@ -7,12 +7,12 @@ on:
   push:
   pull_request:
 
-# env:
-#   CARGO_TERM_COLOR: always
-
 defaults:
   run:
     shell: bash --noprofile --norc -CeEuo pipefail {0}
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   rust-test:
@@ -21,11 +21,11 @@ jobs:
       matrix:
         os: [ubuntu-24.04, windows-latest, macos-14, macos-13]
     runs-on: ${{ matrix.os }}
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v4
+        with:
+          node-version: 23
       - uses: pnpm/action-setup@v4
         with:
           version: 10
@@ -62,10 +62,33 @@ jobs:
         uses: ./
         with:
           url: |-
-            https://github.com/axodotdev/cargo-dist
-            https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/llrt.json
-            https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/fnm.json
-            https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/bun.json
+              https://github.com/ahaoboy/txiki.js-build
+              https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/llrt.json
+              https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/fnm.json
+              https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/node.json
+              https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/bun.json
+              https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/boa.json
+              https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/hermes.json
+              https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/xst.json
+          # FIXME: too many url will throw error
+          # url: |-
+          #   https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/node.json
+          #   https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/bun.json
+          #   https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/boa.json
+          #   https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/llrt.json
+          #   https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/hermes.json
+          #   https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/xst.json
+          #   https://github.com/denoland/deno
+          #   https://github.com/ahaoboy/txiki.js-build
+          #   https://github.com/ahaoboy/spidermonkey-build
+          #   https://github.com/ahaoboy/v8-build
+          #   https://github.com/ahaoboy/jsc-build
+          #   https://github.com/ahaoboy/jerryscript-build
+          #   https://github.com/ahaoboy/mujs-build
+          #   https://github.com/axodotdev/cargo-dist
+          #   https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/llrt.json
+          #   https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/fnm.json
+          #   https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/bun.json
 
       - name: test
         run: |
