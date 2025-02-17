@@ -17,9 +17,8 @@ Download, install, and setup in GitHub Actions.
 ```yaml
 - uses: easy-install/easy-setup@v1
   with:
-    url: https://github.com/ahaoboy/easy-install
-    version: latest
-    name: ei
-  env:
-    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    url: |-
+      https://github.com/denoland/deno
+      https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/node.json
+      https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/bun.json
 ```
