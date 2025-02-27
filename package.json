@@ -26,10 +26,8 @@
     "build": "tsc -p tsconfig.build.json && npm run bundle",
     "bundle": "esbuild --target=node20 --outdir=bundle --bundle --minify --platform=node --format=cjs src/action.ts"
   },
-  "dependencies": {
-    "@easy-install/easy-install": "1.3.4"
-  },
   "devDependencies": {
+    "@easy-install/easy-install": "^1.3.8",
     "@actions/core": "1.11.1",
     "@types/node": "22.13.4",
     "esbuild": "0.25.0",

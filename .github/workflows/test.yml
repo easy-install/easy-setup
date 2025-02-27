@@ -38,26 +38,18 @@ jobs:
         uses: ./
         with:
           url: https://github.com/denoland/deno
-          version: latest
-          name: deno
       - name: setup ei
         uses: ./
         with:
           url: https://github.com/ahaoboy/easy-install
-          version: latest
-          name: ei
       - name: setup qjs-ng
         uses: ./
         with:
           url: https://github.com/ahaoboy/quickjs-ng-build
-          version: latest
-          name: qjs-ng
       - name: setup mujs
         uses: ./
         with:
           url: https://github.com/ahaoboy/mujs-build
-          version: latest
-          name: mujs
       - name: url list
         uses: ./
         with:
