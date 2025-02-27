@@ -87,3 +87,25 @@ jobs:
           fnm --version
           llrt --version
           bun --version
+
+      - name: install js engine
+        uses: ./
+        with:
+          url: |-
+            https://github.com/ahaoboy/easy-install
+            https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/node.json
+            https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/bun.json
+            https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/boa.json
+            https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/llrt.json
+            https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/hermes.json
+            https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/xst.json
+            https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/quickjs-ng.json
+            https://github.com/denoland/deno
+            https://github.com/ahaoboy/txiki.js-build
+            https://github.com/ahaoboy/spidermonkey-build
+            https://github.com/ahaoboy/v8-build
+            https://github.com/ahaoboy/jsc-build
+            https://github.com/ahaoboy/jerryscript-build
+            https://github.com/ahaoboy/mujs-build
+            https://github.com/ahaoboy/quickjs-build
+            https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/graaljs.json
