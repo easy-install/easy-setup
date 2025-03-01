@@ -107,5 +107,5 @@ jobs:
             https://github.com/ahaoboy/jsc-build
             https://github.com/ahaoboy/jerryscript-build
             https://github.com/ahaoboy/mujs-build
-            https://github.com/ahaoboy/quickjs-build
+            https://github.com/ahaoboy/mujs-one
             https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/graaljs.json
