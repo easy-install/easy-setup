@@ -34,6 +34,9 @@ jobs:
           pnpm install
           pnpm run build
           pnpm run bundle
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.18'
       - name: setup deno
         uses: ./
         with:
