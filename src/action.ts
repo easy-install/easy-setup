@@ -9,6 +9,7 @@ const nameList = getMultilineInput('name')
 
 async function main() {
   console.log(`easy-setup: ${version}`)
+  console.log(`nodejs: ${process.version}`);
   for (let i = 0; i < urlList.length; i++) {
     const url = urlList[i]
     const name = nameList[i]
