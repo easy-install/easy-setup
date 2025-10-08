@@ -19,7 +19,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-24.04, windows-latest, macos-14, macos-13]
+        os: [ubuntu-latest, windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -38,10 +38,6 @@ jobs:
         uses: ./
         with:
           url: https://github.com/denoland/deno
-      - name: setup ei
-        uses: ./
-        with:
-          url: https://github.com/ahaoboy/easy-install
       - name: setup qjs-ng
         uses: ./
         with:
@@ -80,7 +76,7 @@ jobs:
           qjs ./test.js
           mujs ./test.js
 
-          ls -lh ~/.easy-install
+          ls -lh ~/.ei
 
           which llrt
           which fnm
@@ -92,7 +88,6 @@ jobs:
         uses: ./
         with:
           url: |-
-            https://github.com/ahaoboy/easy-install
             https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/node.json
             https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/bun.json
             https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/boa.json
@@ -108,4 +103,3 @@ jobs:
             https://github.com/ahaoboy/jerryscript-build
             https://github.com/ahaoboy/mujs-build
             https://github.com/ahaoboy/mujs-one
-            https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/graaljs.json

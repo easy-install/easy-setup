@@ -8,20 +8,18 @@ inputs:
   url:
     description: 'The url to install'
     required: true
-  version:
-    description: 'The version of easy-setup to install. (e.g. "latest", "0.1.4")'
-    required: false
-  name:
-    description: 'The binary name'
-    required: false
-outputs:
-  version:
-    description: The version of easy-setup that was installed.
-  install-dir:
-    description: The dir to the easy-setup executable.
-  download-url:
-    description: The URL from which easy-setup was downloaded.
 
 runs:
-  using: 'node20'
-  main: 'bundle/action.js'
+  using: "composite"
+  steps:
+    - name: Run installer
+      shell: bash
+      run: |
+        curl -fsSL https://raw.githubusercontent.com/easy-install/easy-install/main/install.sh | bash
+
+    - name: Run installer
+      shell: bash
+      run: |
+        bash "${{ github.action_path }}/action.sh"
+      env:
+        INPUT_URL: ${{ inputs.url }}

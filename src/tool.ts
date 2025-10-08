@@ -43,6 +43,7 @@ export function getMultilineInput(
   options?: InputOptions,
 ): string[] {
   const inputs: string[] = getInput(name, options)
+    .replaceAll(",", "\n")
     .split('\n')
     .filter((x) => x !== '')
 
