@@ -4,6 +4,7 @@ author: ahaoboy
 branding:
   icon: play-circle
   color: white
+
 inputs:
   url:
     description: 'The url to install'
@@ -21,5 +22,6 @@ runs:
       shell: bash
       run: |
         bash "${{ github.action_path }}/action.sh"
+
       env:
         INPUT_URL: ${{ inputs.url }}
