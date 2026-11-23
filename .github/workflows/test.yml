@@ -31,6 +31,7 @@ jobs:
             quickjs-ng/quickjs --name qjs --alias qjs-ng
             https://github.com/pocket-nexus/quickjs-oxide --alias qjs-oxide
             https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/llrt.json
+            https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/bun.json
             https://github.com/denoland/deno
             https://github.com/ahaoboy/txiki.js-build
             https://github.com/ahaoboy/spidermonkey-build
