@@ -66,11 +66,23 @@ jobs:
         if: runner.os == 'Windows'
         shell: powershell
         run: |
+          function Format-EiSize([long] $Bytes) {
+            $units = 'B', 'KB', 'MB', 'GB', 'TB'
+            $value = [double] $Bytes
+            $index = 0
+            while ($value -ge 1024 -and $index -lt ($units.Count - 1)) {
+              $value = $value / 1024
+              $index++
+            }
+            if ($index -eq 0) { '{0:N0} {1}' -f $value, $units[$index] }
+            else { '{0:N1} {1}' -f $value, $units[$index] }
+          }
+
           Push-Location "$HOME\.ei"
           Get-ChildItem -Recurse -Depth 1 |
             Sort-Object FullName |
             ForEach-Object {
-              $size = if ($_.PSIsContainer) { '<DIR>' } else { $_.Length.ToString('N0') }
+              $size = if ($_.PSIsContainer) { '<DIR>' } else { Format-EiSize $_.Length }
               '{0,12}  {1}' -f $size, $_.FullName.Substring($PWD.Path.Length + 1)
             }
           Pop-Location
@@ -79,11 +91,25 @@ jobs:
         if: runner.os != 'Windows'
         run: |
           cd ~/.ei
+          human_size() {
+            awk -v bytes="$1" 'BEGIN {
+              split("B KB MB GB TB", units, " ")
+              value = bytes
+              i = 1
+              while (value >= 1024 && i < 5) {
+                value = value / 1024
+                i++
+              }
+              if (i == 1) printf "%d %s", value, units[i]
+              else printf "%.1f %s", value, units[i]
+            }'
+          }
+
           find . -mindepth 1 -maxdepth 2 | sort | while IFS= read -r path; do
             if [ -d "$path" ]; then
               size="<DIR>"
             else
-              size="$(wc -c <"$path" | tr -d '[:space:]')"
+              size="$(human_size "$(wc -c <"$path")")"
             fi
             printf '%12s  %s\n' "$size" "$path"
           done
