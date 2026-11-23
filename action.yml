@@ -7,21 +7,87 @@ branding:
 
 inputs:
   url:
-    description: 'The url to install'
+    description: |
+      Targets to install, one per line. Each line is passed to `ei` as separate
+      arguments split on spaces, so flags are supported, for example:
+      `quickjs-ng/quickjs --name qjs --alias qjs-ng`
     required: true
 
 runs:
   using: "composite"
   steps:
-    - name: Run installer
+    - name: Install ei (Windows)
+      if: runner.os == 'Windows'
+      shell: powershell
+      run: |
+        $ErrorActionPreference = 'Stop'
+
+        $eiDir = if ($env:EI_DIR) { $env:EI_DIR } else { Join-Path $HOME '.ei' }
+
+        $installed = Get-Command ei -CommandType Application -ErrorAction SilentlyContinue |
+          Select-Object -First 1
+        if ($installed) {
+          Write-Output "ei is already installed: $($installed.Source)"
+          exit 0
+        }
+
+        $eiExe = Join-Path $eiDir 'ei.exe'
+        if (Test-Path -LiteralPath $eiExe) {
+          Write-Output "ei is already installed: $eiExe"
+          if ($env:GITHUB_PATH) {
+            Add-Content -LiteralPath $env:GITHUB_PATH -Value $eiDir
+          }
+          exit 0
+        }
+
+        Write-Output 'Installing ei'
+        powershell -ExecutionPolicy Bypass -c "irm https://raw.githubusercontent.com/easy-install/easy-install/main/install.ps1 | iex"
+        if ($LASTEXITCODE -ne 0) {
+          exit $LASTEXITCODE
+        }
+
+    - name: Install ei (Linux/macOS)
+      if: runner.os != 'Windows'
       shell: bash
       run: |
-        curl -fsSL https://raw.githubusercontent.com/easy-install/easy-install/main/install.sh | bash
+        set -euo pipefail
 
-    - name: Run installer
+        ei_dir="${EI_DIR:-$HOME/.ei}"
+        case "$ei_dir" in
+          "~/"*) ei_dir="$HOME/${ei_dir#\~/}" ;;
+        esac
+
+        if command -v ei >/dev/null 2>&1; then
+          echo "ei is already installed: $(command -v ei)"
+          exit 0
+        fi
+
+        if [ -x "$ei_dir/ei" ]; then
+          echo "ei is already installed: $ei_dir/ei"
+          if [ -n "${GITHUB_PATH:-}" ]; then
+            printf '%s\n' "$ei_dir" >> "$GITHUB_PATH"
+          fi
+          exit 0
+        fi
+
+        echo 'Installing ei'
+        curl -fsSL https://raw.githubusercontent.com/easy-install/easy-install/main/install.sh | sh
+
+    - name: Install targets (Windows)
+      if: runner.os == 'Windows'
+      shell: powershell
+      run: |
+        powershell -NoProfile -ExecutionPolicy Bypass -File "${{ github.action_path }}/action.ps1"
+        if ($LASTEXITCODE -ne 0) {
+          exit $LASTEXITCODE
+        }
+      env:
+        INPUT_URL: ${{ inputs.url }}
+
+    - name: Install targets
+      if: runner.os != 'Windows'
       shell: bash
       run: |
         bash "${{ github.action_path }}/action.sh"
-
       env:
         INPUT_URL: ${{ inputs.url }}

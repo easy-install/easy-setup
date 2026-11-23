@@ -23,29 +23,14 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
-      - name: setup deno
-        uses: ./
-        with:
-          url: https://github.com/denoland/deno
-      - name: setup qjs-ng
-        uses: ./
-        with:
-          url: https://github.com/ahaoboy/quickjs-ng-build
-      - name: setup mujs
-        uses: ./
-        with:
-          url: https://github.com/ahaoboy/mujs-build
       - name: url list
         uses: ./
         with:
           url: |-
-            https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/node.json
-            https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/bun.json
-            https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/boa.json
+            https://github.com/ahaoboy/mujs-build
+            quickjs-ng/quickjs --name qjs --alias qjs-ng
+            https://github.com/pocket-nexus/quickjs-oxide --alias qjs-oxide
             https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/llrt.json
-            https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/hermes.json
-            https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/xst.json
-            https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/fnm.json
             https://github.com/denoland/deno
             https://github.com/ahaoboy/txiki.js-build
             https://github.com/ahaoboy/spidermonkey-build
@@ -60,6 +45,8 @@ jobs:
           deno --version
           ei --version
           qjs -e "console.log(1)"
+          qjs-ng -e "console.log(1)"
+          qjs-oxide -e "console.log(1)"
 
           echo "console.log(1+1)" >> ./test.js
           qjs ./test.js
@@ -73,22 +60,28 @@ jobs:
           llrt --version
           bun --version
 
-      - name: install js engine
-        uses: ./
-        with:
-          url: |-
-            https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/node.json
-            https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/bun.json
-            https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/boa.json
-            https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/llrt.json
-            https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/hermes.json
-            https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/xst.json
-            https://github.com/ahaoboy/easy-install/raw/refs/heads/main/dist-manifest/quickjs-ng.json
-            https://github.com/denoland/deno
-            https://github.com/ahaoboy/txiki.js-build
-            https://github.com/ahaoboy/spidermonkey-build
-            https://github.com/ahaoboy/v8-build
-            https://github.com/ahaoboy/jsc-build
-            https://github.com/ahaoboy/jerryscript-build
-            https://github.com/ahaoboy/mujs-build
-            https://github.com/ahaoboy/mujs-one
+      - name: show ~/.ei structure (Windows)
+        if: runner.os == 'Windows'
+        shell: powershell
+        run: |
+          Push-Location "$HOME\.ei"
+          Get-ChildItem -Recurse -Depth 1 |
+            Sort-Object FullName |
+            ForEach-Object {
+              $size = if ($_.PSIsContainer) { '<DIR>' } else { $_.Length.ToString('N0') }
+              '{0,12}  {1}' -f $size, $_.FullName.Substring($PWD.Path.Length + 1)
+            }
+          Pop-Location
+
+      - name: show ~/.ei structure (Linux/macOS)
+        if: runner.os != 'Windows'
+        run: |
+          cd ~/.ei
+          find . -mindepth 1 -maxdepth 2 | sort | while IFS= read -r path; do
+            if [ -d "$path" ]; then
+              size="<DIR>"
+            else
+              size="$(wc -c <"$path" | tr -d '[:space:]')"
+            fi
+            printf '%12s  %s\n' "$size" "$path"
+          done
